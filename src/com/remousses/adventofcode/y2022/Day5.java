@@ -48,7 +48,6 @@ public class Day5 extends AbstractDay {
 	            	Matcher ccnp = CRATES_COLUMN_NUMBER_PATTERN.matcher(s);
 					if (ccnp.find()) {
 	            		isCrateColumn.set(true);
-//	            		customizeCratesMap.put(Integer.valueOf(ccnp.group()), new ArrayList<>());
 	            		return false;
 	            	}
 	            	return true;
@@ -64,36 +63,35 @@ public class Day5 extends AbstractDay {
         }
         
         // retrieve column order
-        initCratesMap.entrySet().stream().forEach(val -> {
-    		int key = 1;
-    		for (String v : val.getValue()) {
-        		List<String> crateList = customizeCratesMap.computeIfAbsent(key, (k) -> new ArrayList<>());
-        		if (!v.isBlank()) {
-        			crateList.add(0, v);
-        		}
-        		key++;
-    		}
-    	});
+        initCratesMap.forEach((key1, value) -> {
+			int key = 1;
+			for (String v : value) {
+				List<String> crateList = customizeCratesMap.computeIfAbsent(key, (k) -> new ArrayList<>());
+				if (!v.isBlank()) {
+					crateList.add(0, v);
+				}
+				key++;
+			}
+		});
         
         System.out.println("custom");
-        customizeCratesMap.entrySet().forEach((k) -> System.out.println("k : " + k.getKey() + ", v : " + k.getValue()));
+        customizeCratesMap.forEach((key, value) -> System.out.println("k : " + key + ", v : " + value));
         
         // manage movements
-        columnToMoveMap.entrySet().forEach(val -> {
-        	List<Integer> list = val.getValue();
-        	Integer nbCrateToMove = list.get(0);
+        columnToMoveMap.forEach((key, list) -> {
+			Integer nbCrateToMove = list.get(0);
 
-        	List<String> fromStack = customizeCratesMap.get(list.get(1));
-        	List<String> toStack = customizeCratesMap.get(list.get(2));
-        	int size = fromStack.size() - 1;
-        	for (int e = 0; e < nbCrateToMove; e++) {
-    			String crate = fromStack.get(size - e);
-    			fromStack.remove(size - e);
-        		toStack.add(crate);
-        	}
-        });
+			List<String> fromStack = customizeCratesMap.get(list.get(1));
+			List<String> toStack = customizeCratesMap.get(list.get(2));
+			int size = fromStack.size() - 1;
+			for (int e = 0; e < nbCrateToMove; e++) {
+				String crate = fromStack.get(size - e);
+				fromStack.remove(size - e);
+				toStack.add(crate);
+			}
+		});
         
         System.out.println("res");
-        customizeCratesMap.entrySet().forEach((k) -> System.out.println("k : " + k.getKey() + ", v : " + k.getValue()));
+        customizeCratesMap.forEach((key, value) -> System.out.println("k : " + key + ", v : " + value));
 	}
 }
