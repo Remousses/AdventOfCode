@@ -1,5 +1,7 @@
 package com.remousses.adventofcode.y2022;
 
+import com.remousses.adventofcode.AbstractDay;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;

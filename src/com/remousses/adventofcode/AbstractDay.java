@@ -1,4 +1,4 @@
-package com.remousses.adventofcode.y2022;
+package com.remousses.adventofcode;
 
 import java.io.BufferedReader;
 import java.io.File;

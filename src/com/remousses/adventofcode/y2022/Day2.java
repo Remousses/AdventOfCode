@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.remousses.adventofcode.AbstractDay;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
